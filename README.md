@@ -1,4 +1,4 @@
-# Zhengdong 的数字花园
+# fatfatshark 的数字花园
 
 一个纯静态的 Astro 博客，以卡片首页、悬浮导航和舒适的阅读体验为核心。页面结构参考 ooliver.cn 的 Myriad 主页，页面与插画为本项目独立实现。
 
@@ -39,7 +39,30 @@ npm run preview  # 预览生产构建
 
 修改 `src/data/site.ts`：名字、简介、首页英文标语、邮箱、GitHub 地址、书籍、项目、音乐和收藏链接。
 
-替换首页壁纸：将图片放进 `public/images/`，然后修改 `site.wallpaper`。现在使用原创 SVG 风景插画，图片在桌面端覆盖整个屏幕，手机端保持背景固定。
+### 替换首页背景图
+
+1. 将图片放到项目的 `public/images/`，例如 `wallpaper-coast.webp`。
+2. 修改 `src/data/site.ts` 中以下字段（只改字段值，保留其他配置）：
+
+```ts
+wallpaper: '/images/wallpaper-coast.webp',
+wallpaperPosition: 'center',
+wallpaperMobilePosition: '62% top',
+```
+
+浏览器路径不包含 `public`，文件名和扩展名必须与真实文件完全一致。建议使用小写英文、数字和短横线命名。每次换图使用新文件名，可以减少浏览器缓存造成的旧图残留。
+
+没有固定尺寸要求。针对当前全屏背景，我建议横向 16:9，至少 1920 × 1080，优先 2560 × 1440；格式优先 WebP，也支持 JPG、PNG 和 SVG。照片建议压缩到约 300 KB–1 MB，尽量小于 2 MB。这些是本项目的画质与加载速度建议，不是 Vercel 限制。
+
+背景使用 `cover` 等比例铺满屏幕，会裁切超出屏幕的部分，不会拉伸图片。手机竖屏通常会裁掉横图两侧，重要主体尽量不要贴边，下半部分也会被卡片和渐变覆盖。
+
+`wallpaperPosition` 是电脑端的对齐位置；`wallpaperMobilePosition` 是手机端的对齐位置。可使用 `center`、`center top`、`70% center` 等 CSS background-position 值。手机端可以从 `50% top`（居中）开始，再尝试 `35% top`（偏左）或 `75% top`（偏右）。
+
+```sh
+npm run dev
+```
+
+先在电脑和手机预览，再构建、提交并推送到已连接 Vercel 的 Git 分支。换背景不需要再次修改域名解析。
 
 当前名字、文案、收藏与五篇文章是初始示例，公开发布前请替换或删除。头像与封面在 `public/images/`，可以直接替换为自己的图片。
 

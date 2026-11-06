@@ -20,7 +20,7 @@
 在终端打开当前目录：
 
 ```sh
-cd /Users/lizhengdong/Blog
+cd /Users/lizhengdong/FatfatsharkBlog
 git init -b main
 git add .
 git commit -m "Initial blog"
@@ -141,7 +141,7 @@ Valid Configuration 表示域名配置通过。DNS 验证完成后 Vercel 自动
 修改文章或配置后：
 
 ```sh
-cd /Users/lizhengdong/Blog
+cd /Users/lizhengdong/FatfatsharkBlog
 npm run build
 git add .
 git commit -m "Update blog"

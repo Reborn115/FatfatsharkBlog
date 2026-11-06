@@ -3,7 +3,7 @@
 .home-signature strong { display: block; font-size: 11px; line-height: 1.4; font-weight: 600; }
 .home-signature small { display: block; font-size: 8px; line-height: 1.5; color: var(--muted); }
 .layout-switch { display: inline-flex; align-items: center; gap: 6px; padding: 7px 11px; font-size: 10px; color: var(--muted); background: var(--surface); border: 1px solid var(--line); border-radius: 9px; }
-.immersive-home .home-wallpaper { position: fixed; inset: 0; z-index: -3; background-position: center; background-size: cover; transition: filter .5s; }
+.immersive-home .home-wallpaper { position: fixed; inset: 0; z-index: -3; background-position: var(--wallpaper-position, center); background-size: cover; transition: filter .5s; }
 .immersive-home .wallpaper-wash { position: fixed; inset: 0; z-index: -2; pointer-events: none; background: linear-gradient(180deg, #f7f7f20a 0%, #f7f7f20a 33%, #f7f7f25e 56%, #f7f7f2c4 77%, #f7f7f2ef 100%); }
 .immersive-home .ambient { display: none; }
 .immersive-home:not(.expanded-home) .page-shell { width: calc(100% - 180px); max-width: 1240px; min-height: 100svh; display: flex; flex-direction: column; }
@@ -138,7 +138,7 @@
   .immersive-home:not(.expanded-home) .site-footer { min-height: 90px; }
 }
 @media (max-width: 700px) {
-  .immersive-home .home-wallpaper { background-position: 62% top; }
+  .immersive-home .home-wallpaper { background-position: var(--wallpaper-mobile-position, 62% top); }
   .immersive-home:not(.expanded-home) .page-shell { width: calc(100% - 32px); margin: 0 16px; padding-bottom: 88px; }
   .immersive-home:not(.expanded-home) .topbar { height: 65px; }
   .immersive-home:not(.expanded-home) .wordmark { font-size: 14px; }
@@ -150,6 +150,7 @@
   .immersive-home:not(.expanded-home) .bento-grid { gap: 10px; }
   .immersive-home:not(.expanded-home) .profile-card { display: flex; grid-column: 1; grid-row: 1 / span 2; padding: 18px; min-height: 300px; }
   .immersive-home:not(.expanded-home) .profile-card .card-topline { margin-bottom: 0; }
+  .immersive-home:not(.expanded-home) .profile-card h2 { font-size: clamp(16px, 4.7vw, 21px); }
   .immersive-home:not(.expanded-home) .profile-avatar { margin: 21px 0 18px; }
   .immersive-home:not(.expanded-home) .profile-tagline { margin-bottom: 20px; }
   .immersive-home:not(.expanded-home) .profile-bottom { margin-top: auto; flex-direction: column; align-items: flex-start; gap: 14px; }
