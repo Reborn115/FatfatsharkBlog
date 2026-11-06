@@ -1,0 +1,25 @@
+---
+import Icon from './Icon.astro';
+import { getPosts, postUrl } from '../lib/posts';
+const posts = await getPosts();
+---
+<dialog class="search-dialog" id="search-dialog" aria-labelledby="search-title">
+  <div class="search-top">
+    <Icon name="search" size={23} />
+    <label class="sr-only" for="search-input" id="search-title">搜索文章</label>
+    <input id="search-input" type="search" placeholder="搜索文章、标签或关键词…" autocomplete="off" />
+    <button type="button" class="icon-button" data-search-close aria-label="关闭搜索"><Icon name="close" size={19} /></button>
+  </div>
+  <div class="search-results" aria-live="polite">
+    <p class="search-caption">所有文章</p>
+    {posts.map(post => (
+      <a class="search-result" href={postUrl(post.id)} data-search-entry data-search-text={`${post.data.title} ${post.data.description} ${post.data.category} ${post.data.tags.join(' ')}`.toLowerCase()}>
+        <span class:list={['search-result-icon', post.data.color]}><Icon name={post.data.icon} size={19} /></span>
+        <span><strong>{post.data.title}</strong><small>{post.data.category} · {post.data.minutes} 分钟阅读</small></span>
+        <Icon name="right" size={17} />
+      </a>
+    ))}
+    <p class="search-empty" hidden>还没有找到相关内容，换个关键词试试。</p>
+  </div>
+  <div class="search-bottom"><span>在这个花园里找找</span><span><kbd>Esc</kbd> 关闭</span></div>
+</dialog>

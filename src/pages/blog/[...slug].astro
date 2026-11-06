@@ -1,0 +1,59 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getPosts, formatDate } from '../../lib/posts';
+import { site } from '../../data/site';
+
+export async function getStaticPaths() {
+  return (await getPosts()).map(post => ({ params: { slug: post.id }, props: { post } }));
+}
+interface Props { post: CollectionEntry<'blog'> }
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+const posts = await getPosts();
+const related = posts.filter(item => item.id !== post.id).slice(0, 2);
+const toc = headings.filter(heading => heading.depth === 2 || heading.depth === 3);
+---
+<BaseLayout title={post.data.title} description={post.data.description} active="blog" article>
+  <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
+  <div class="article-breadcrumb"><a href="/blog/"><Icon name="left" size={15} />所有文章</a><span>{post.data.category}</span></div>
+  <div class="article-grid">
+    <article class="article-main">
+      <header class="article-header">
+        <div class="article-category"><span class:list={['article-icon', post.data.color]}><Icon name={post.data.icon} size={22} /></span><span>{post.data.category}</span>{post.data.demo && <span class="demo-label">示例文章</span>}</div>
+        <h1>{post.data.title}</h1>
+        <p class="article-description">{post.data.description}</p>
+        <div class="article-meta"><a href="/about/"><img src="/images/avatar.svg" width="25" height="25" alt="" /><span>{site.name}</span></a><span class="meta-dot">·</span><time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time><span class="meta-dot">·</span><span>{post.data.minutes} 分钟阅读</span></div>
+      </header>
+      <div class="article-body" id="article-body"><Content /></div>
+      <div class="article-end"><span><Icon name="flower" size={19} />写到这里，刚刚好。</span><button type="button" class="text-link" data-share><Icon name="copy" size={15} />复制文章链接</button></div>
+      <div class="article-tags">{post.data.tags.map(tag => <a href={`/blog/?category=${encodeURIComponent(tag)}`}><Icon name="hash" size={12} />{tag}</a>)}</div>
+      <div class="article-author"><img src="/images/avatar.svg" width="48" height="48" alt={`${site.name} 的头像`} /><div><strong>{site.name}</strong><p>{site.tagline} 谢谢你读到这里。</p></div><a href="/about/" class="icon-button" aria-label="了解作者"><Icon name="arrow" size={19} /></a></div>
+    </article>
+    {toc.length > 0 && <aside class="article-sidebar"><div class="toc"><p class="toc-title"><Icon name="file" size={13} />这篇文章里</p><nav aria-label="文章目录">{toc.map(heading => <a class:list={[{ 'toc-sub': heading.depth === 3 }]} href={`#${heading.slug}`}>{heading.text}</a>)}</nav><a class="toc-back" href="#main-content"><Icon name="arrow" size={12} />回到开头</a></div></aside>}
+  </div>
+  <section class="related-section" aria-labelledby="related-title"><div class="related-header"><h2 id="related-title">也许你还想读</h2><a href="/blog/" class="text-link">所有文章<Icon name="right" size={14} /></a></div><div class="related-grid">{related.map(item => <PostCard post={item} compact />)}</div></section>
+  <script>
+    document.querySelectorAll<HTMLPreElement>('.article-body pre').forEach(pre => {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'code-wrapper';
+      pre.parentElement?.insertBefore(wrapper, pre);
+      wrapper.append(pre);
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'copy-code-button';
+      button.textContent = '复制';
+      button.setAttribute('aria-label', '复制代码');
+      wrapper.append(button);
+      button.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(pre.querySelector('code')?.textContent || '');
+          button.textContent = '已复制';
+          setTimeout(() => button.textContent = '复制', 1800);
+        } catch { button.textContent = '请手动复制'; }
+      });
+    });
+  </script>
+</BaseLayout>

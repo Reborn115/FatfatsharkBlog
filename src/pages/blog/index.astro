@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getPosts } from '../../lib/posts';
+const posts = await getPosts();
+const categories = [...new Set(posts.map(post => post.data.category))];
+---
+<BaseLayout title="文章" active="blog">
+  <div class="section-intro-row"><section class="section-intro" aria-labelledby="blog-title"><p class="eyebrow"><span class="eyebrow-line"></span>NOTES, THOUGHTS & LITTLE THINGS</p><h1 id="blog-title">把想法写下来<span class="wordmark-dot">。</span></h1><p>代码里的发现，生活里的小事。<br />在这里，慢慢整理，也慢慢分享。</p></section><span class="section-count">{String(posts.length).padStart(2, '0')} NOTES & COUNTING</span></div>
+  <div class="filters" data-filter-group="posts" role="group" aria-label="按文章分类筛选">
+    <button type="button" class="filter-button selected" data-filter="all" aria-pressed="true">全部<span class="filter-count">{posts.length}</span></button>
+    {categories.map(category => <button type="button" class="filter-button" data-filter={category} aria-pressed="false">{category}<span class="filter-count">{posts.filter(post => post.data.category === category).length}</span></button>)}
+  </div>
+  <section class="posts-grid" aria-label="文章列表">
+    {posts.map(post => <PostCard post={post} />)}
+    <p class="empty-state" data-filter-empty="posts" hidden>这个分类暂时还没有文章。</p>
+  </section>
+  <div class="blog-footnote"><span>每一篇，都是一次小小的整理。</span><a href="/rss.xml"><Icon name="rss" size={14} />通过 RSS 订阅</a></div>
+</BaseLayout>

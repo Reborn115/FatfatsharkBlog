@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+import { albums, bookshelf, projects, bookmarks } from '../../data/site';
+const count = albums.length + bookshelf.length + projects.length + bookmarks.length;
+const categories = [
+  { id: 'all', label: '全部', icon: 'grid', count },
+  { id: 'books', label: '书架', icon: 'book', count: bookshelf.length },
+  { id: 'music', label: '音乐', icon: 'headphones', count: albums.length },
+  { id: 'projects', label: '项目', icon: 'layers', count: projects.length },
+  { id: 'bookmarks', label: '链接', icon: 'bookmark', count: bookmarks.length },
+];
+---
+<BaseLayout title="收藏夹" active="library">
+  <div class="section-intro-row"><section class="section-intro" aria-labelledby="library-title"><p class="eyebrow"><span class="eyebrow-line"></span>THINGS WORTH KEEPING</p><h1 id="library-title">留一点喜欢的东西<span class="wordmark-dot">。</span></h1><p>书、声音、工具，还有一路捡到的灵感。<br />一个小小的收藏夹，随时回来翻翻。</p></section><span class="section-count">{String(count).padStart(2, '0')} LITTLE FINDS</span></div>
+  <div class="filters" data-filter-group="library" role="group" aria-label="按收藏类型筛选">{categories.map((category, index) => <button type="button" class:list={['filter-button', { selected: index === 0 }]} data-filter={category.id} aria-pressed={index === 0}><Icon name={category.icon} size={13} />{category.label}<span class="filter-count">{category.count}</span></button>)}</div>
+  <section class="library-grid" aria-label="收藏内容">
+    {bookshelf.map(book => <article class="library-card" data-filter-item="library" data-categories="books"><a class="library-art book-art" href={book.url} target="_blank" rel="noopener noreferrer" aria-label={`了解《${book.title}》`}><img src={book.cover} width="111" height="153" alt={`《${book.title}》概念封面`} loading="lazy" /></a><div class="library-card-body"><span class="library-card-category">BOOKS / {book.type}</span><h2>{book.title}</h2><p>{book.author}<br />{book.note}</p><div class="library-card-footer"><span>{book.status}</span><a href={book.url} target="_blank" rel="noopener noreferrer">了解这本书<Icon name="arrow" size={13} /></a></div></div></article>)}
+    {albums.map(album => <article class="library-card" data-filter-item="library" data-categories="music"><div class="library-art album-art"><img src={album.cover} width="151" height="151" alt={`${album.title} 概念歌单封面`} loading="lazy" /></div><div class="library-card-body"><span class="library-card-category">SOUNDS / {album.tag}</span><h2>{album.title}</h2><p>{album.subtitle}</p><div class="library-card-footer"><span>概念歌单</span><a href={`https://music.163.com/#/search/m/?s=${encodeURIComponent(album.tag)}&type=10`} target="_blank" rel="noopener noreferrer">找找这种声音<Icon name="arrow" size={13} /></a></div></div></article>)}
+    {projects.map(project => <article class="library-card" data-filter-item="library" data-categories="projects"><a href={project.href} class:list={['library-art', 'resource-art', project.color]} aria-label={`查看${project.title}`}><Icon name={project.icon} size={39} /></a><div class="library-card-body"><span class="library-card-category">PROJECTS / {project.tags[0]}</span><h2>{project.title}</h2><p>{project.description}</p><div class="library-card-footer"><span>{project.tags.join(' · ')}</span><a href={project.href}>看看<Icon name="arrow" size={13} /></a></div></div></article>)}
+    {bookmarks.map(item => <article class="library-card" data-filter-item="library" data-categories="bookmarks"><a href={item.href} target="_blank" rel="noopener noreferrer" class:list={['library-art', 'resource-art', item.color]} aria-label={`访问${item.name}`}><Icon name={item.icon} size={39} /></a><div class="library-card-body"><span class="library-card-category">LINKS / {item.category}</span><h2>{item.name}</h2><p>{item.description}</p><div class="library-card-footer"><span>{new URL(item.href).hostname}</span><a href={item.href} target="_blank" rel="noopener noreferrer">去逛逛<Icon name="arrow" size={13} /></a></div></div></article>)}
+    <p class="empty-state" data-filter-empty="library" hidden>这里暂时还没有收藏。</p>
+  </section>
+  <p class="library-note">这里先放了一些示例收藏和原创概念封面。慢慢换成你喜欢的东西，这个空间就会长成你的样子。</p>
+</BaseLayout>

@@ -1,0 +1,16 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Icon from './Icon.astro';
+import { formatDate, postUrl } from '../lib/posts';
+interface Props { post: CollectionEntry<'blog'>; compact?: boolean }
+const { post, compact = false } = Astro.props;
+---
+<a class:list={['post-card', { 'post-card-compact': compact }]} href={postUrl(post.id)} data-filter-item="posts" data-categories={[post.data.category, ...post.data.tags].join('|')}>
+  <div class:list={['post-art', post.data.color]} aria-hidden="true"><span class="post-art-orbit"></span><Icon name={post.data.icon} size={compact ? 24 : 38} /><span class="post-art-dot"></span>{!compact && <span class="post-art-label">{post.data.category.toUpperCase()}</span>}</div>
+  <div class="post-card-body">
+    <div class="post-card-meta"><span>{post.data.category}</span><span class="meta-dot">·</span><time datetime={post.data.date.toISOString()}>{formatDate(post.data.date, true)}</time></div>
+    <h3>{post.data.title}</h3>
+    {!compact && <p>{post.data.description}</p>}
+    <div class="post-card-bottom"><span>{post.data.minutes} 分钟阅读</span><span class="post-read-arrow"><Icon name="arrow" size={17} /></span></div>
+  </div>
+</a>

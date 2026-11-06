@@ -1,0 +1,25 @@
+---
+import Icon from './Icon.astro';
+interface Props { active: string }
+const { active } = Astro.props;
+const items = [
+  { key: 'home', href: '/', label: '首页', icon: 'home' },
+  { key: 'library', href: '/library/', label: '收藏夹', icon: 'grid' },
+  { key: 'blog', href: '/blog/', label: '文章', icon: 'pen' },
+  { key: 'about', href: '/about/', label: '关于我', icon: 'user' },
+];
+---
+<nav class="nav-island" aria-label="主导航">
+  <a href="/" class="nav-brand" aria-label="回到首页"><Icon name="flower" size={25} /></a>
+  <span class="nav-divider"></span>
+  <div class="nav-links">
+    {items.map(item => (
+      <a class:list={['nav-item', { active: active === item.key }]} href={item.href} aria-label={item.label} aria-current={active === item.key ? 'page' : undefined} data-tip={item.label}>
+        <Icon name={item.icon} size={21} />
+      </a>
+    ))}
+  </div>
+  <span class="nav-divider"></span>
+  <button class="nav-item" type="button" data-search-open aria-label="搜索文章" data-tip="搜索 · ⌘ K"><Icon name="search" size={20} /></button>
+  <button class="nav-item theme-toggle" type="button" data-theme-toggle aria-label="切换到深色模式" data-tip="切换外观"><Icon name="sun" class="theme-sun" size={21} /><Icon name="moon" class="theme-moon" size={21} /></button>
+</nav>

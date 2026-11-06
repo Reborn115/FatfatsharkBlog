@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none">
+  <defs>
+    <linearGradient id="sky" x1="800" y1="0" x2="800" y2="1000" gradientUnits="userSpaceOnUse"><stop stop-color="#b3cedc"/><stop offset=".55" stop-color="#e1e4d9"/><stop offset="1" stop-color="#f3e4c8"/></linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#7f9aa7"/><stop offset="1" stop-color="#b8c9c8"/></linearGradient>
+    <linearGradient id="grass" x1="800" y1="500" x2="800" y2="1000" gradientUnits="userSpaceOnUse"><stop stop-color="#acbd9a"/><stop offset="1" stop-color="#6e9774"/></linearGradient>
+    <linearGradient id="house" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f4ead5"/><stop offset="1" stop-color="#d9d6bd"/></linearGradient>
+    <linearGradient id="path" x1="1000" y1="600" x2="600" y2="1000" gradientUnits="userSpaceOnUse"><stop stop-color="#dfd2b9"/><stop offset="1" stop-color="#efe2c8"/></linearGradient>
+    <radialGradient id="light"><stop stop-color="#fff3cb" stop-opacity=".55"/><stop offset="1" stop-color="#fff3cb" stop-opacity="0"/></radialGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="2"/></filter>
+    <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".6" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".035"/></feComponentTransfer><feBlend in="SourceGraphic" mode="multiply"/></filter>
+    <pattern id="panes" width="85" height="94" patternUnits="userSpaceOnUse"><rect x="5" y="5" width="75" height="84" fill="url(#glass)"/><path d="M8 8 76 84M8 19l57 66" stroke="#e1eee2" stroke-width="6" opacity=".27"/><path d="M43 5v84M5 49h75" stroke="#e9e6cf" stroke-width="4"/></pattern>
+    <g id="fir"><path d="M0 0v232" stroke="#677460" stroke-width="12"/><path d="m0-16-70 120h43l-63 83h57l-66 77h198l-66-77h57l-63-83h43Z" fill="#75977d"/><path d="M0 0v242m0-174-27 36m27 37-48 46m48 23-67 54" stroke="#688970" stroke-width="3"/></g>
+  </defs>
+  <g filter="url(#grain)">
+    <path fill="url(#sky)" d="M0 0h1600v1000H0z"/>
+    <circle cx="1180" cy="176" r="83" fill="#f5e5b6" opacity=".7"/>
+    <circle cx="1180" cy="176" r="200" fill="url(#light)"/>
+    <g fill="#f8f7e9" opacity=".55" filter="url(#soft)"><path d="M81 160c28-40 69-52 98-12 45-17 90-4 100 31H58c3-11 10-17 23-19Z"/><path d="M431 71c20-30 49-32 66-5 35-9 65 2 69 20H416Z"/><path d="M989 289c25-36 66-42 93-16 42-11 62 9 72 30H953c8-10 19-15 36-14Z"/></g>
+    <g stroke="#879f9c" stroke-width="2" opacity=".5"><path d="M800 125q9-8 17 0 9-9 17 0M850 103q6-6 12 0 6-7 12 0"/></g>
+    <path d="M0 521q124-150 244-84t208 10 220-83 225 38 183-37 276 10 244-42v667H0Z" fill="#bccbb2"/>
+    <path d="M0 599q121-114 267-67t238-18 248-71 269 51 231-29 347 1v534H0Z" fill="#a2ba9e"/>
+    <path d="M0 675q144-106 353-41t293-25 251-17 229 32 260-55 214 2v429H0Z" fill="url(#grass)"/>
+    <g opacity=".65"><use href="#fir" x="220" y="388" transform="translate(66 95) scale(.7)"/><use href="#fir" x="540" y="410" transform="translate(135 185) scale(.65)"/><use href="#fir" x="680" y="424" transform="translate(167 200) scale(.7)"/><use href="#fir" x="1280" y="404" transform="translate(250 90) scale(.75)"/></g>
+    <path d="M837 667q-25 44-123 83T552 885q-14 77-113 115h414q-42-77-23-119t75-64 95-149Z" fill="url(#path)"/>
+    <path d="M-67 139 303 49l299 226v421L-67 794Z" fill="url(#house)"/>
+    <path d="m303 49 299 226-309 37L-67 139Z" fill="#b6b3a1"/>
+    <path d="m-65 116 368-87 322 230-18 27L294 75-54 157Z" fill="#858e80"/>
+    <path d="m303 86 271 200v380L303 704Z" fill="#dadbc6"/>
+    <path d="M-30 213 257 150v498L-30 715Z" fill="url(#panes)"/>
+    <path d="M-30 213 257 150v498L-30 715Z" stroke="#ece7d2" stroke-width="14"/>
+    <path d="m72 193 1 498m98-518v493M-30 372l287-59M-30 539l287-66" stroke="#dddccb" stroke-width="12"/>
+    <path d="m351 317 69 22v227l-69-5Z" fill="url(#glass)" stroke="#f2e9d3" stroke-width="9"/>
+    <path d="m467 348 60 19v220l-60-15Z" fill="url(#glass)" stroke="#f2e9d3" stroke-width="8"/>
+    <path d="m384 330 1 234m-34-122 69 14m76-98 1 221m-30-110 60 17" stroke="#eee6d1" stroke-width="5"/>
+    <path d="m-44 735 335-71 311-17v49L289 749-44 819Z" fill="#b5b9a0"/>
+    <path d="m-44 735 335-71 311-17" stroke="#d6d5bc" stroke-width="5"/>
+    <path d="m-54 794 348-69 310-37v57l-329 41-329 66Z" fill="#8b9b85"/>
+    <path d="M-20 777q70-25 98-8t79-9 91-12 63 4 81-16 58 4 137-16" stroke="#738e6d" stroke-width="20"/>
+    <path d="M1094 373v371" stroke="#6f7b64" stroke-width="18"/>
+    <path d="m1093 505-72-61m74 2 84-50m-85 178 77-60m-77 93-64-48" stroke="#748267" stroke-width="10"/>
+    <g fill="#8faa81"><ellipse cx="1032" cy="389" rx="72" ry="66"/><ellipse cx="1112" cy="330" rx="80" ry="77"/><ellipse cx="1171" cy="379" rx="79" ry="76"/><ellipse cx="1106" cy="421" rx="104" ry="81"/><ellipse cx="1044" cy="476" rx="76" ry="66"/><ellipse cx="1165" cy="479" rx="77" ry="66"/></g>
+    <g fill="#a1b88a" opacity=".8"><ellipse cx="1069" cy="336" rx="53" ry="42"/><ellipse cx="1171" cy="350" rx="59" ry="36"/><ellipse cx="1015" cy="432" rx="47" ry="41"/></g>
+    <g fill="#74956f"><ellipse cx="1118" cy="484" rx="65" ry="48"/><ellipse cx="1073" cy="503" rx="39" ry="28"/></g>
+    <g transform="translate(1460 426)"><use href="#fir" transform="scale(1.5)"/></g>
+    <g transform="translate(1550 460)"><use href="#fir" transform="scale(1.45)"/></g>
+    <path d="M1330 778v-65m66 82v-65m-66 2 84 17m-87-11 87 18m-84 20 81 12" stroke="#bbbf9c" stroke-width="7" stroke-linecap="round"/>
+    <g stroke="#567a5c" stroke-width="3" stroke-linecap="round" opacity=".5"><path d="m934 835 3-18 7 10m52 57 6-19 4 15m-131 41 4-13 4 7m-774-14 3-14 6 10m86-41 3-12 5 9m1104 106 7-18 4 13m-242-110 4-15 6 12m-856 88 3-13 5 8"/></g>
+    <g fill="#f5e5ad"><circle cx="250" cy="837" r="3"/><circle cx="277" cy="855" r="3"/><circle cx="1300" cy="913" r="4"/><circle cx="1340" cy="928" r="3"/><circle cx="1410" cy="888" r="3"/><circle cx="995" cy="781" r="3"/></g>
+    <circle cx="470" cy="284" r="320" fill="url(#light)"/>
+  </g>
+</svg>
