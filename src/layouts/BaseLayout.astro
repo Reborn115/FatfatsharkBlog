@@ -6,7 +6,7 @@ import Icon from '../components/Icon.astro';
 import { site } from '../data/site';
 interface Props { title?: string; description?: string; active?: string; wide?: boolean; article?: boolean; immersive?: boolean }
 const { title, description = site.description, active = 'home', wide = false, article = false, immersive = false } = Astro.props;
-const pageTitle = title ? `${title} · ${site.name}` : site.title;
+const pageTitle = title ? `${title} · ${site.title}` : site.title;
 const canonical = Astro.site && Astro.site.hostname !== 'example.com' ? new URL(Astro.url.pathname, Astro.site) : undefined;
 ---
 <!doctype html>
@@ -15,12 +15,12 @@ const canonical = Astro.site && Astro.site.hostname !== 'example.com' ? new URL(
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#f7f7f2" />
+    <meta name="theme-color" content="#f2f7ff" />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content={article ? 'article' : 'website'} />
     {canonical && <><link rel="canonical" href={canonical} /><meta property="og:url" content={canonical} /></>}
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/jpeg" href={site.icon} />
     <link rel="alternate" type="application/rss+xml" title={site.title} href="/rss.xml" />
     <title>{pageTitle}</title>
     <script is:inline>
@@ -39,7 +39,7 @@ const canonical = Astro.site && Astro.site.hostname !== 'example.com' ? new URL(
     <Nav active={active} />
     <div class:list={['page-shell', { 'page-shell-wide': wide }]}>
       <header class="topbar">
-        <a class="wordmark" href="/"><Icon name="flower" size={19} /><span>{site.name}<span class="wordmark-dot">.</span></span></a>
+        <a class="wordmark" href="/"><img src={site.icon} width="24" height="24" class="site-icon" alt="" /><span>{site.title}<span class="wordmark-dot">.</span></span></a>
         <div class="topbar-right"><span class="live-dot"></span><span class="topbar-note">保持好奇，慢慢生长</span>{immersive && <button class="layout-switch" type="button" data-layout-toggle aria-label="切换为完整卡片视图"><Icon name="grid" size={15} /><span>卡片视图</span></button>}<button class="topbar-search" type="button" data-search-open aria-label="搜索文章"><Icon name="search" size={17} /><kbd>⌘ K</kbd></button></div>
       </header>
       <main id="main-content"><slot /></main>

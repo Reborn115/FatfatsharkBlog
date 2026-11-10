@@ -1,5 +1,6 @@
 ---
 import Icon from './Icon.astro';
+import { site } from '../data/site';
 interface Props { active: string }
 const { active } = Astro.props;
 const items = [
@@ -10,7 +11,7 @@ const items = [
 ];
 ---
 <nav class="nav-island" aria-label="主导航">
-  <a href="/" class="nav-brand" aria-label="回到首页"><Icon name="flower" size={25} /></a>
+  <a href="/" class="nav-brand" aria-label="回到首页"><img src={site.icon} width="28" height="28" class="site-icon" alt="" /></a>
   <span class="nav-divider"></span>
   <div class="nav-links">
     {items.map(item => (

@@ -5,7 +5,7 @@ function updateThemeButtons() {
   document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]').forEach(button => {
     button.setAttribute('aria-label', dark ? '切换到浅色模式' : '切换到深色模式');
   });
-  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#171b1b' : '#f7f7f2');
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', getComputedStyle(root).getPropertyValue('--bg').trim());
 }
 
 updateThemeButtons();

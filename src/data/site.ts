@@ -1,10 +1,11 @@
 // Personalize the site here. These are starter copy and public resource links.
 export const site = {
   name: 'fatfatshark',
-  title: 'fatfatshark 的数字花园',
+  title: '肥肥鲨的游泳池',
   description: '记录代码、生活，以及那些值得留下的小事。',
   tagline: '写代码，也记录生活。',
   motto: '循此苦旅，以达天际',
+  icon: '/images/sharkpool.jpeg',
   avatar: '/images/fatfatshark.jpeg',
   wallpaper: '/images/bandream.jpeg',
   wallpaperPosition: 'center', // Desktop crop: center, center top, or e.g. 70% center.
