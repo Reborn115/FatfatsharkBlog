@@ -1,3 +1,5 @@
+import './home-panel';
+
 const root = document.documentElement;
 
 function updateThemeButtons() {
