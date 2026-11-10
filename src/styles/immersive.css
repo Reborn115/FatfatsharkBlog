@@ -193,3 +193,7 @@
   .immersive-home:not(.expanded-home) .book-main img { width: 34px; height: 47px; }
   .immersive-home:not(.expanded-home) .card-eyebrow { font-size: 8px; letter-spacing: .2px; }
 }
+
+@media (max-width: 700px) and (orientation: portrait) {
+  .immersive-home .home-wallpaper { top: -300px; }
+}

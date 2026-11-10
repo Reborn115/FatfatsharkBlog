@@ -4,10 +4,11 @@ export const site = {
   title: 'fatfatshark 的数字花园',
   description: '记录代码、生活，以及那些值得留下的小事。',
   tagline: '写代码，也记录生活。',
-  motto: 'The little things matter.',
-  wallpaper: '/images/garden-wallpaper.svg',
+  motto: '循此苦旅，以达天际',
+  avatar: '/images/fatfatshark.jpeg',
+  wallpaper: '/images/bandream.jpeg',
   wallpaperPosition: 'center', // Desktop crop: center, center top, or e.g. 70% center.
-  wallpaperMobilePosition: '62% top', // Mobile crop: adjust the first percentage to move the focus.
+  wallpaperMobilePosition: '83% top', // Mobile crop: adjust the first percentage to move the focus.
   bio: '一个慢慢生长的个人空间。\n收藏灵感，记录折腾，让想法有迹可循。',
   timezone: 'Asia/Shanghai',
   email: '', // Add an email address to enable the contact link.

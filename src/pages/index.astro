@@ -8,14 +8,14 @@ const hour = Number(new Intl.DateTimeFormat('en-GB', { timeZone: site.timezone, 
 ---
 <BaseLayout active="home" wide immersive>
   <section class="home-intro" aria-labelledby="home-title">
-    <div><p class="eyebrow"><span class="eyebrow-line"></span>A LITTLE CORNER OF THE INTERNET</p><h1 id="home-title" class="home-motto">{site.motto}</h1><a class="home-signature" href="/about/"><img src="/images/avatar.svg" width="29" height="29" alt="" /><span><strong>{site.name}</strong><small>{site.tagline}</small></span></a></div>
+    <div><p class="eyebrow"><span class="eyebrow-line"></span>A LITTLE CORNER OF THE INTERNET</p><h1 id="home-title" class="home-motto">{site.motto}</h1><a class="home-signature" href="/about/"><img src={site.avatar} width="29" height="29" alt="" /><span><strong>{site.name}</strong><small>{site.tagline}</small></span></a></div>
     <div class="intro-aside"><span class="intro-sticker"><Icon name="leaf" size={21} /></span><p>一些想法，一些收藏，<br />还有一点认真生活的痕迹。</p><span class="intro-tiny">MAKE ROOM FOR WHAT MATTERS.</span></div>
   </section>
 
   <section class="bento-grid" aria-label="我的数字花园">
     <article class="garden-card profile-card">
       <div class="card-topline"><span class="card-eyebrow">ABOUT ME</span><span class="status-pill"><span class="live-dot"></span>保持好奇</span></div>
-      <div class="profile-avatar"><img src="/images/avatar.svg" width="88" height="88" alt={`${site.name} 的花朵头像`} /><span class="avatar-badge" aria-label="小小的问候">✳</span></div>
+      <div class="profile-avatar"><img src={site.avatar} width="88" height="88" alt={`${site.name} 的头像`} /><span class="avatar-badge" aria-label="小小的问候">✳</span></div>
       <h2>{site.name}<span class="profile-name-dot">.</span></h2>
       <p class="profile-tagline">{site.tagline}</p>
       <p class="profile-bio">{site.bio}</p>

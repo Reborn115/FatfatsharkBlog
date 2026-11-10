@@ -60,6 +60,7 @@ button { border: 0; }
 button:disabled { cursor: default; }
 img, svg { vertical-align: middle; }
 img { max-width: 100%; }
+.home-signature img, .profile-avatar > img, .about-profile > img, .article-meta img, .article-author > img { object-fit: cover; }
 svg { flex-shrink: 0; }
 ::selection { background: var(--sage-bg); color: var(--text); }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; border-radius: 4px; }
