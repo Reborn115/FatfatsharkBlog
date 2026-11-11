@@ -1,9 +1,8 @@
 const panel = document.querySelector<HTMLElement>('#home-panel');
-const toggle = document.querySelector<HTMLButtonElement>('[data-home-panel-toggle]');
 const scrollArea = document.querySelector<HTMLElement>('.home-panel-scroll');
 const desktop = matchMedia('(min-width: 941px)');
 
-if (panel && toggle && scrollArea) {
+if (panel && scrollArea) {
   const body = document.body;
   const main = document.querySelector<HTMLElement>('#main-content');
   let open = false;
@@ -17,10 +16,8 @@ if (panel && toggle && scrollArea) {
     open = value;
     body.classList.toggle('home-panel-open', open);
     panel!.inert = !open;
-    toggle!.setAttribute('aria-expanded', String(open));
-    toggle!.querySelector('span')!.textContent = open ? '收起内容' : '展开内容';
     if (open && focusContent) main?.focus({ preventScroll: true });
-    if (!open && panel!.contains(document.activeElement)) toggle!.focus({ preventScroll: true });
+    if (!open && panel!.contains(document.activeElement)) document.querySelector<HTMLAnchorElement>('.wordmark')?.focus({ preventScroll: true });
   }
 
   function updateDesktop() {
@@ -29,15 +26,22 @@ if (panel && toggle && scrollArea) {
     open = false;
     panel!.inert = desktop.matches;
     scrollArea!.scrollTop = 0;
-    toggle!.setAttribute('aria-expanded', 'false');
-    toggle!.querySelector('span')!.textContent = '展开内容';
-    if (desktop.matches && location.hash) setOpen(true);
+    wheelTotal = 0;
+    gestureUsed = false;
+    gestureStartedInScrollingContent = false;
+    clearTimeout(wheelTimer);
+    wheelTimer = undefined;
   }
 
   updateDesktop();
   desktop.addEventListener('change', updateDesktop);
-  toggle.addEventListener('click', () => setOpen(!open));
-  document.querySelector('[data-home-panel-close]')?.addEventListener('click', () => setOpen(false));
+  window.addEventListener('pageshow', event => {
+    if (!event.persisted) return;
+    body.classList.add('home-panel-reset');
+    updateDesktop();
+    panel.getBoundingClientRect();
+    requestAnimationFrame(() => body.classList.remove('home-panel-reset'));
+  });
   document.querySelector('.skip-link')?.addEventListener('click', event => {
     if (!desktop.matches) return;
     event.preventDefault();
